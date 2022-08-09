@@ -13,6 +13,13 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	mavenCentral()
+	maven {
+		url 'https://repo.sleeping.town'
+		content {
+			includeGroup 'com.unascribed'
+		}
+	}
 }
 
 // All dependency versions are declared in the gradle.properties file
@@ -23,11 +30,11 @@ dependencies {
 	})
 	modImplementation "org.quiltmc:quilt-loader:${project.quilt_loader_version}"
 
-	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
-	// Quilted Fabric API will automatically pull in the correct QSL version.
-	modImplementation "org.quiltmc.quilted-fabric-api:quilted-fabric-api:${quilted_fabric_api_version}-${minecraft_version}"
-	// If you want to use QSL by itself over Quilted Fabric API, uncomment the line below (and comment out the line above):
-	// 	modImplementation "org.quiltmc:qsl:${qsl_version}+${minecraft_version}"
+	implementation "com.unascribed:nilloader:${project.nil_version}"
+	implementation "net.java.dev.jna:jna:${project.jna_version}"
+
+	include "com.unascribed:nilloader:${project.nil_version}"
+	include "net.java.dev.jna:jna:${project.jna_version}"
 }
 
 processResources {
